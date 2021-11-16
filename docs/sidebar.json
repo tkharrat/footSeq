@@ -1,0 +1,9 @@
+{
+  "footSeq": {
+    "Overview": "/",
+    "module name here": "core.html",
+    "Config": "sequnece_plot.html",
+    "Data transform": "data_structure.html",
+    "Get the raw data": "ex_statsbomb_spadl_prepare.html"
+  }
+}
