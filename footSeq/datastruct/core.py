@@ -38,7 +38,10 @@ def _nice_time(row) -> str:
 class FootSeqTuple(fastuple):
     def show(self, ctx=None, **kwargs):
         play_sequence, target = self
+        ## remove na
         play_sequence.dropna(inplace=True)
+        ## reduce size
+        play_sequence = play_sequence.tail(10).copy()
         play_sequence["nice_time"] = play_sequence.apply(_nice_time, axis=1)
         labels = play_sequence[
             ["nice_time", "type_name", "player_name", "team_name", "result_name"]
@@ -53,7 +56,7 @@ class FootSeqTuple(fastuple):
             labeltitle=["time", "action", "player", "team", "result"],
             zoom=False,
             ax=ctx,
-            show=False,
+            return_fig=False,
             **kwargs,
         )
         ctx.set_title(target)
@@ -67,6 +70,7 @@ class FootSeqTransform(ItemTransform):
     """
     Produce a processed sequence of play and a target
     """
+
     def __init__(
         self,
         sequence_df: pd.DataFrame,
@@ -128,7 +132,7 @@ class FootSeqToTensor(ItemTransform):
     "Transform Tuple of pd.DataFrame and integer to appropriate tensors"
     order = 10
 
-    def __init__(self, cat_names, cont_names, feats_first = True, max_len = None):
+    def __init__(self, cat_names, cont_names, feats_first=True, max_len=None):
         store_attr()
 
     def encodes(self, x):
@@ -164,7 +168,9 @@ class FootSeqToTensor(ItemTransform):
             conts_df = pd.DataFrame(conts.numpy(), columns=self.cont_names)
         else:
             cats_df = pd.DataFrame(cats.transpose(1, 0).numpy(), columns=self.cat_names)
-            conts_df = pd.DataFrame(conts.transpose(1, 0).numpy(), columns=self.cont_names)
+            conts_df = pd.DataFrame(
+                conts.transpose(1, 0).numpy(), columns=self.cont_names
+            )
 
         df = pd.concat(
             [self.meta_df.reset_index(drop=True), cats_df, conts_df],
@@ -175,26 +181,41 @@ class FootSeqToTensor(ItemTransform):
 
 # Cell
 class Pad_Seq(ItemTransform):
-    def encodes(self, samples, pad_idx=-999, pad_fields=[0, 1], pad_first=False, backwards=False):
+    def encodes(
+        self, samples, pad_idx=-999, pad_fields=[0, 1], pad_first=False, backwards=False
+    ):
         "Function that collect `samples` and adds padding"
         self.pad_idx = pad_idx
         pad_fields = L(pad_fields)
         max_len_l = pad_fields.map(lambda f: max([len(s[f]) for s in samples]))
-        if backwards: pad_first = not pad_first
+        if backwards:
+            pad_first = not pad_first
+
         def _f(field_idx, x):
-            if field_idx not in pad_fields: return x
-            idx = pad_fields.items.index(field_idx) #TODO: remove items if L.index is fixed
+            if field_idx not in pad_fields:
+                return x
+            idx = pad_fields.items.index(
+                field_idx
+            )  # TODO: remove items if L.index is fixed
             sl = slice(-len(x), sys.maxsize) if pad_first else slice(0, len(x))
-            pad =  x.new_zeros((max_len_l[idx]-x.shape[0], x.shape[1]))+pad_idx
+            pad = x.new_zeros((max_len_l[idx] - x.shape[0], x.shape[1])) + pad_idx
             x1 = torch.cat([pad, x] if pad_first else [x, pad], dim=0)
-            if backwards: x1 = x1.flip(0)
+            if backwards:
+                x1 = x1.flip(0)
             return retain_type(x1, x)
+
         return [tuple(map(lambda idxx: _f(*idxx), enumerate(s))) for s in samples]
+
     def decodes(self, t):
-        pad_idx = self.pad_idx if hasattr(self,'pad_idx') else 1
+        pad_idx = self.pad_idx if hasattr(self, "pad_idx") else 1
+
         def _decode(o):
-            def _f(tsr): return (tsr.shape[0] == 1) and (tsr.tolist()[0] == pad_idx)
-            return  o[np.where([not _f(torch.unique(t)) for t in torch.unbind(o)])]
+            def _f(tsr):
+                return (tsr.shape[0] == 1) and (tsr.tolist()[0] == pad_idx)
+
+            return o[np.where([not _f(torch.unique(t)) for t in torch.unbind(o)])]
+
         return (_decode(t[0]), _decode(t[1]), t[2])
 
-pad_seq=Pad_Seq()
+
+pad_seq = Pad_Seq()

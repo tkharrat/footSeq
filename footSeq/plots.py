@@ -6,12 +6,16 @@ __all__ = ['SPADL_CONFIG', 'ZLINE', 'ZFIELD', 'ZACTION', 'field', 'get_lines', '
 
 import itertools
 import math
+import pickle
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 from matplotlib.patches import Arc
 from matplotlib.pyplot import cm
+from fastcore.basics import *
+from fastcore.foundation import *
 
 SPADL_CONFIG = {
     "length": 105,
@@ -34,27 +38,28 @@ ZACTION = 9000
 
 # Cell
 
+
 def _plot_rectangle(x1, y1, x2, y2, ax, color):
     ax.plot([x1, x1], [y1, y2], color=color, zorder=ZLINE)
     ax.plot([x2, x2], [y1, y2], color=color, zorder=ZLINE)
     ax.plot([x1, x2], [y1, y1], color=color, zorder=ZLINE)
     ax.plot([x1, x2], [y2, y2], color=color, zorder=ZLINE)
 
+
 def _field(
     ax=None,
+    fig=None,
     linecolor="black",
     fieldcolor="white",
     alpha=1,
     figsize=None,
     field_config=SPADL_CONFIG,
-    show=True,
 ):
     cfg = field_config
 
     # Create figure
-    if ax is None:
-        fig = plt.figure()
-        ax = fig.gca()
+    if fig is None:
+        fig, ax = plt.subplots()
 
     # Pitch Outline & Centre Line
     x1, y1, x2, y2 = (
@@ -170,22 +175,20 @@ def _field(
     ax.add_patch(leftArc)
     ax.add_patch(rightArc)
 
-    # Tidy Axes
-    plt.axis("off")
+    ## Tidy Axes
+    ax.axis("off")
 
     # Display Pitch
     if figsize:
         h, w = fig.get_size_inches()
-        newh, neww = figsize, w / h * figsize
+        ##newh, neww = figsize, w / h * figsize
+        newh, neww = figsize, 68/105 * figsize
         fig.set_size_inches(newh, neww, forward=True)
 
-    if show:
-        plt.show()
-
-    return ax
+    return fig, ax
 
 
-def field(color="white", figsize=None, ax=None, show=True):
+def field(color="white", figsize=None, fig=None, ax=None):
     """
     Plot football pitch in different colors
 
@@ -209,28 +212,29 @@ def field(color="white", figsize=None, ax=None, show=True):
     """
     if color == "white":
         return _field(
+            fig=fig,
             ax=ax,
             linecolor="black",
             fieldcolor="white",
             alpha=1,
             figsize=figsize,
             field_config=SPADL_CONFIG,
-            show=show,
         )
     elif color == "green":
         return _field(
+            fig=fig,
             ax=ax,
             linecolor="white",
             fieldcolor="green",
             alpha=0.4,
             figsize=figsize,
             field_config=SPADL_CONFIG,
-            show=show,
         )
     else:
         raise Exception("Invalid field color")
 
 # Cell
+
 
 def get_lines(labels):
     labels = np.asarray(labels)
@@ -248,6 +252,7 @@ def get_lines(labels):
 
     return [" | ".join(ls) for ls in labels]
 
+
 def plot_actions(
     location,
     action_type=None,
@@ -256,17 +261,16 @@ def plot_actions(
     label=None,
     labeltitle=None,
     color="white",
+    fig=None,
     ax=None,
     figsize=None,
     zoom=False,
-    legloc="right",
-    show=True,
     show_legend=True,
+    return_fig=False,
 ):
     """Plot SPADL actions on a football pitch"""
 
-    ax = field(ax=ax, color=color, figsize=figsize, show=False)
-    fig = plt.gcf()
+    fig, ax = field(ax=ax, fig=fig, color=color, figsize=figsize)
     figsize, _ = fig.get_size_inches()
     arrowsize = math.sqrt(figsize)
 
@@ -284,6 +288,7 @@ def plot_actions(
         team = ["Team X" for t in action_type]
     team = np.asarray(team)
     assert team.ndim == 1
+
     if result is None:
         result = [1 for t in action_type]
     result = np.asarray(result)
@@ -300,6 +305,7 @@ def plot_actions(
     if label.ndim == 1:
         label = label.reshape(-1, 1)
     assert label.ndim == 2
+
     indexa = np.asarray([list(range(1, len(label) + 1))]).reshape(-1, 1)
     label = np.concatenate([indexa, label], axis=1)
     if labeltitle is not None:
@@ -309,8 +315,8 @@ def plot_actions(
         label = np.concatenate([labeltitle, label])
         lines = get_lines(label)
         titleline = lines[0]
-        plt.plot(np.NaN, np.NaN, "-", color="none", label=titleline)
-        plt.plot(np.NaN, np.NaN, "-", color="none", label="-" * len(titleline))
+        ax.plot(np.NaN, np.NaN, "-", color="none", label=titleline)
+        ax.plot(np.NaN, np.NaN, "-", color="none", label="-" * len(titleline))
         lines = lines[1:]
     else:
         lines = get_lines(label)
@@ -366,7 +372,7 @@ def plot_actions(
         if eventtype != "pass":
             eventmarkerdict[eventtype] = next(eventmarkers)
 
-    markersize = figsize * 2
+    markersize = figsize
 
     def get_color(type_name, te):
         home_team = team[0]
@@ -384,10 +390,9 @@ def plot_actions(
     red_markers = iter(list(cm.Reds(np.linspace(0.1, 0.8, red_n))))
 
     cnt = 1
-    for ty, r, loc, color, line in zip(action_type, result, location,
-                                       colors, lines):
+    for ty, r, loc, color, line in zip(action_type, result, location, colors, lines):
         [sx, sy, ex, ey] = loc
-        plt.text(sx + text_offset, sy, str(cnt))
+        ax.text(sx + text_offset, sy, str(cnt))
         cnt += 1
         if color == "blue":
             c = next(blue_markers)
@@ -435,22 +440,15 @@ def plot_actions(
                     length_includes_head=True,
                     zorder=ZACTION,
                 )
-    # leg = plt.legend(loc=9,prop={'family': 'monospace','size':12})
+
     if show_legend:
-        if legloc == "top":
-            leg = plt.legend(
-                bbox_to_anchor=(0.5, 1.05),
-                loc="lower center",
-                prop={"family": "monospace"},
-            )
-        elif legloc == "right":
-            leg = plt.legend(
-                bbox_to_anchor=(1.05, 0.5),
-                loc="center left",
-                prop={"family": "monospace"},
-            )
+        leg = ax.legend(
+            bbox_to_anchor=(1., 0.75, 1, 0.05),
+            loc="best",
+            prop={"family": "monospace"},
+        )
 
-    if show:
-        plt.show()
-
-    return ax
+    if return_fig:
+        return fig, ax
+    else:
+        return ax
