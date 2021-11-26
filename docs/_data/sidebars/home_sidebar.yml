@@ -19,6 +19,9 @@ entries:
       title: Data transform
       url: data_structure.html
     - output: web,pdf
+      title: Model
+      url: learner.html
+    - output: web,pdf
       title: Get the raw data
       url: ex_statsbomb_spadl_prepare.html
     output: web

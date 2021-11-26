@@ -182,7 +182,7 @@ class FootSeqToTensor(ItemTransform):
 # Cell
 class Pad_Seq(ItemTransform):
     def encodes(
-        self, samples, pad_idx=-999, pad_fields=[0, 1], pad_first=False, backwards=False
+        self, samples, pad_idx=0, pad_fields=[0, 1], pad_first=False, backwards=False
     ):
         "Function that collect `samples` and adds padding"
         self.pad_idx = pad_idx

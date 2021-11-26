@@ -16,10 +16,14 @@ index = {"SPADL_CONFIG": "00_sequnece_plot.ipynb",
          "FootSeqTransform": "01_data_structure.ipynb",
          "FootSeqToTensor": "01_data_structure.ipynb",
          "Pad_Seq": "01_data_structure.ipynb",
-         "pad_seq": "01_data_structure.ipynb"}
+         "pad_seq": "01_data_structure.ipynb",
+         "Embedding": "02_learner.ipynb",
+         "MultiEmbedding": "02_learner.ipynb",
+         "footSeqModel": "02_learner.ipynb"}
 
 modules = ["plots.py",
-           "datastruct/core.py"]
+           "datastruct/core.py",
+           "model/learner.py"]
 
 doc_url = "https://tkharrat.github.io/footSeq/"
 
