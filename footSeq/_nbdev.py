@@ -19,7 +19,9 @@ index = {"SPADL_CONFIG": "00_sequnece_plot.ipynb",
          "pad_seq": "01_data_structure.ipynb",
          "Embedding": "02_learner.ipynb",
          "MultiEmbedding": "02_learner.ipynb",
-         "footSeqModel": "02_learner.ipynb"}
+         "MixedSeqModel": "02_learner.ipynb",
+         "MixedSeqLearner": "02_learner.ipynb",
+         "mixed_seq_learner": "02_learner.ipynb"}
 
 modules = ["plots.py",
            "datastruct/core.py",

@@ -36,7 +36,7 @@ def _nice_time(row) -> str:
 
 
 class FootSeqTuple(fastuple):
-    def show(self, ctx=None, **kwargs):
+    def show(self, ctx=None, title=None, **kwargs):
         play_sequence, target = self
         ## remove na
         play_sequence.dropna(inplace=True)
@@ -59,7 +59,8 @@ class FootSeqTuple(fastuple):
             return_fig=False,
             **kwargs,
         )
-        ctx.set_title(target)
+        if title is None: title = target
+        ctx.set_title(title)
 
         return ctx
 
