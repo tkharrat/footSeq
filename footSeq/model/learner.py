@@ -178,15 +178,17 @@ class MixedSeqModel(Module):
 class MixedSeqLearner(Learner):
     "`Learner` for mixed sequence data"
 
-    def predict(self, file: Path):
+    def predict(self, files: List[Path]):
         "Predict a sequence of play read from a file"
-        dl = self.dls.test_dl(seq_id)
-        inp, preds, _, dec_preds = self.get_preds(
-            dl=dl, with_input=True, with_decoded=True
+        dl = self.dls.test_dl(listify(files))
+        preds, _, cls_preds = self.get_preds(
+            dl=dl, with_decoded=True
         )
-        b = (*tuplify(inp), *tuplify(dec_preds))
-        full_dec = self.dls.decode(b)
-        return full_dec, dec_preds[0], preds[0]
+        labels = dl.tfms.target_vocab[0]
+        probs = pd.DataFrame(preds.detach().numpy(), columns=labels)
+        clss = [labels[i] for i in cls_preds]
+
+        return probs, clss
 
 
 @delegates(build_ts_model)
