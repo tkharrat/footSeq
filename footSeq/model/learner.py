@@ -11,12 +11,12 @@ from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
-import progressbar
 from fastai.layers import trunc_normal_
 from fastai.tabular.all import *
 from fastai.text.all import *
 from fastai.vision.all import *
 from fastcore.basics import *
+from progressbar import progressbar
 from tsai.models.RNN import *
 from tsai.models.utils import *
 
@@ -166,7 +166,7 @@ class MixedSeqModel(Module):
 
         self.body = build_ts_model(**kwargs)
 
-    def forward(self, x_cat, x_cont):
+    def forward(self, x_meta, x_cat, x_cont):
         ## run through head first
         x = self.head(x_cat, x_cont)
 
@@ -178,13 +178,15 @@ class MixedSeqModel(Module):
 class MixedSeqLearner(Learner):
     "`Learner` for mixed sequence data"
 
-    def predict(self, seq_id:str):
-        "Predict a sequence of play passed as a pandas DataFrame"
+    def predict(self, file: Path):
+        "Predict a sequence of play read from a file"
         dl = self.dls.test_dl(seq_id)
-        inp,preds,_,dec_preds = self.get_preds(dl=dl, with_input=True, with_decoded=True)
-        b = (*tuplify(inp),*tuplify(dec_preds))
+        inp, preds, _, dec_preds = self.get_preds(
+            dl=dl, with_input=True, with_decoded=True
+        )
+        b = (*tuplify(inp), *tuplify(dec_preds))
         full_dec = self.dls.decode(b)
-        return full_dec,dec_preds[0],preds[0]
+        return full_dec, dec_preds[0], preds[0]
 
 
 @delegates(build_ts_model)
