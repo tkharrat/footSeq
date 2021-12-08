@@ -147,3 +147,5 @@ config.toml
 
 # ignore svg files
 *.svg
+
+/models
