@@ -1,10 +1,13 @@
 {
   "footSeq": {
     "Overview": "/",
-    "module name here": "core.html",
+    "Load Config": "config.html",
+    "Connection": "mongo.html",
     "Config": "sequnece_plot.html",
-    "Data transform": "data_structure.html",
+    "Data transform": "1_seq_data_structure.html",
+    "`Event` Embedded Document": "2_possessions_data_structure.html",
     "Model": "learner.html",
+    "Data preparation": "check_model_output.html",
     "Get the raw data": "ex_statsbomb_spadl_prepare.html"
   }
 }
