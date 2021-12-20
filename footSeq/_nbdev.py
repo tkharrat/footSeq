@@ -32,13 +32,15 @@ index = {"CONFIG": "000_config.ipynb",
          "pad_seq": "01_1_seq_data_structure.ipynb",
          "Event": "01_2_possessions_data_structure.ipynb",
          "Possession": "01_2_possessions_data_structure.ipynb",
+         "ActionValues": "01_2_possessions_data_structure.ipynb",
          "Embedding": "02_learner.ipynb",
          "MultiEmbedding": "02_learner.ipynb",
          "MixedSeqModel": "02_learner.ipynb",
          "MixedSeqLearner": "02_learner.ipynb",
          "mixed_seq_learner": "02_learner.ipynb",
          "MixedSeqLearner.predict_poss": "02_learner.ipynb",
-         "predict_game": "02_learner.ipynb"}
+         "MixedSeqLearner.predict_game": "02_learner.ipynb",
+         "load_all": "02_learner.ipynb"}
 
 modules = ["config/localconfig.py",
            "config/mongo.py",
