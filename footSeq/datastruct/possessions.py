@@ -64,6 +64,10 @@ class Event(mongoengine.EmbeddedDocument):
     generic_action_type_name = mongoengine.StringField(
         db_field="generic_action_type_name", required=True
     )
+    action_subtype_name = mongoengine.StringField(db_field="action_subtype_name", required=True)
+    touches = mongoengine.StringField(db_field="touches", required=True)
+    shot_type = mongoengine.StringField(db_field="shot_type", required=True)
+    shot_handling = mongoengine.StringField(db_field="shot_handling", required=True)
 
     under_pressure = mongoengine.BooleanField(db_field="under_pressure", required=True)
     high_speed = mongoengine.BooleanField(db_field="high_speed", required=True)
@@ -76,6 +80,13 @@ class Event(mongoengine.EmbeddedDocument):
 
     gate_x = mongoengine.FloatField(db_field="gate_x", required=False)
     gate_y = mongoengine.FloatField(db_field="gate_y", required=False)
+
+    ## opponent
+    opponent_position_id = mongoengine.IntField(db_field="opponent_position_id", required=False)
+    opponent_id = mongoengine.IntField(db_field="opponent_id", required=False)
+    opponent_team_name = mongoengine.StringField(db_field="opponent_team_name", required=False)
+    opponent_team_id = mongoengine.IntField(db_field="opponent_team_id", required=False)
+    opponent_name = mongoengine.StringField(db_field="opponent_name", required=False)
 
     body_name = mongoengine.StringField(
         db_field="body_name", required=False, default="Unknown"

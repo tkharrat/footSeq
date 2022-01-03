@@ -40,6 +40,7 @@ index = {"CONFIG": "000_config.ipynb",
          "mixed_seq_learner": "02_learner.ipynb",
          "MixedSeqLearner.predict_poss": "02_learner.ipynb",
          "MixedSeqLearner.predict_game": "02_learner.ipynb",
+         "MixedSeqLearner.save_all": "02_learner.ipynb",
          "load_all": "02_learner.ipynb"}
 
 modules = ["config/localconfig.py",

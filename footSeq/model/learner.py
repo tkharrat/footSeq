@@ -387,6 +387,34 @@ def predict_game(
     return probs_df
 
 # Cell
+
+@patch
+def save_all(self:MixedSeqLearner, path='export', dls_fname='dls', model_fname='model', learner_fname='learner', do_save_dls=True, verbose=False):
+    path = Path(path)
+    if not os.path.exists(path): os.makedirs(path)
+
+    if do_save_dls:
+        self.dls_type = self.dls.__class__.__name__
+        dls_fnames = []
+        self.n_loaders = len(self.dls.loaders)
+        for i,dl in enumerate(self.dls):
+            dl = dl.new(num_workers=1)
+            torch.save(dl, path/f'{dls_fname}_{i}.pth')
+            dls_fnames.append(f'{dls_fname}_{i}.pth')
+
+    # Saves the model along with optimizer
+    self.model_dir = path
+    self.save(f'{model_fname}', with_opt=True)
+
+    # Export learn without the items and the optimizer state for inference
+    self.export(path/f'{learner_fname}.pkl')
+
+    pv(f'Learner saved:', verbose)
+    pv(f"path          = '{path}'", verbose)
+    if do_save_dls: pv(f"dls_fname     = '{dls_fnames}'", verbose)
+    pv(f"model_fname   = '{model_fname}.pth'", verbose)
+    pv(f"learner_fname = '{learner_fname}.pkl'", verbose)
+
 def load_all(
     path="export",
     dls_fname="dls",
@@ -438,7 +466,6 @@ def load_all(
     return learn
 
 # Cell
-
 
 @typedispatch
 def show_results(

@@ -41,8 +41,8 @@ def parse_file_info(file_path, sep="___") -> pd.DataFrame:
         "id": _id,
         "gameId": int(game_id),
         "possNumber": int(poss_nbr),
-        "startId": int(start_id),
-        "endId": int(end_id),
+        "startId": float(start_id),
+        "endId": float(end_id),
         "target": target,
         "file": file_path,
         "nSteps": pd.read_csv(file_path).shape[0],
@@ -111,16 +111,34 @@ def read_sequence_play(file):
     )
 
     ## remove rows with NA on key columns + replace NA on other columns
-    df = df.dropna(
-        subset=[
-            "team_id",
-            "attack_team_id",
-            "is_poss_team",
-            "is_att_team",
-            "start_x",
-            "start_y",
-        ]
-    ).fillna({"possession_name": "Undefined"})
+    df = (
+        df.filter(regex="^((?!opponent_).)*$")
+        .dropna(
+            subset=[
+                "team_id",
+                "generic_action_type_name",
+                "action_subtype_name",
+                "type_name",
+                "result_name",
+                "attack_team_id",
+                "is_poss_team",
+                "is_att_team",
+                "start_x",
+                "start_y",
+                "standart_name",
+                "possession_name",
+                "attack_status_name",
+                "attack_type_name",
+                "under_pressure",
+                "high_speed",
+                "body_name",
+                "touches",
+                "shot_type",
+                "shot_handling",
+            ]
+        )
+        .fillna({"possession_name": "Undefined"})
+    )
 
     return df
 
@@ -295,6 +313,10 @@ class FootSeqTransform(ItemTransform):
 # Cell
 
 
+def _convert_if_int(x):
+    return int(x) if x == int(x) else float(x)
+
+
 class FootSeqToTensor(ItemTransform):
     "Transform Tuple of pd.DataFrame and integer to appropriate tensors. Note that the first dimension is only useful for decoding"
     order = 10
@@ -326,15 +348,18 @@ class FootSeqToTensor(ItemTransform):
         self.meta_cols = [col for col in all_cols if not col in value_cols]
 
         ## prepare info for metadata
-        gm_id, poss_number, start_id, end_id, _ = (
-            df[self.meta_col].values[0].split(self.sep)
-        )
+        try:
+            gm_id, poss_number, start_id, end_id, _ = (
+                df[self.meta_col].values[0].split(self.sep)
+            )
+        except:
+            set_trace()
 
         if self.feats_first:
             return (
                 tensor(
-                    [int(gm_id), int(poss_number), int(start_id), int(end_id)]
-                ).long(),
+                    [float(gm_id), float(poss_number), float(start_id), float(end_id)]
+                ).float(),
                 tensor(df[self.cat_names].values).long(),
                 tensor(df[self.cont_names].values).float(),
                 TensorCategory(tgt),
@@ -342,8 +367,8 @@ class FootSeqToTensor(ItemTransform):
         else:
             return (
                 tensor(
-                    [int(gm_id), int(poss_number), int(start_id), int(end_id)]
-                ).long(),
+                    [float(gm_id), float(poss_number), float(start_id), float(end_id)]
+                ).float(),
                 tensor(df[self.cat_names].values).long().transpose(1, 0),
                 tensor(df[self.cont_names].values).float().transpose(1, 0),
                 TensorCategory(tgt),
@@ -362,7 +387,7 @@ class FootSeqToTensor(ItemTransform):
 
         ## retrieve meta
         tgt_name = self.target_vocab[tgt]
-        meta_file_name = self.sep.join(str(x) for x in meta.numpy())
+        meta_file_name = self.sep.join(str(_convert_if_int(x)) for x in meta.numpy())
         file_name = meta_file_name + self.sep + tgt_name + ".csv"
         file_path = self.base_path / file_name
         if not os.path.isfile(file_path):
