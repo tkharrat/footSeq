@@ -167,17 +167,28 @@ class Possession(mongoengine.Document):
 
 class ActionValues(mongoengine.Document):
     "Store the `ActionValue` document"
+    ## event
     event_id = mongoengine.IntField(db_field="id")
     orig_event_id = mongoengine.StringField(db_field="eventId", primary_key=True)
 
+    ## player
     player_id = mongoengine.IntField(db_field="player_id", required=False)
     player_name = mongoengine.StringField(
         db_field="player_name", required=False, default="Unknown"
     )
 
+    ## opponent
+    opponent_position_id = mongoengine.IntField(db_field="opponent_position_id", required=False)
+    opponent_id = mongoengine.IntField(db_field="opponent_id", required=False)
+    opponent_team_name = mongoengine.StringField(db_field="opponent_team_name", required=False)
+    opponent_team_id = mongoengine.IntField(db_field="opponent_team_id", required=False)
+    opponent_name = mongoengine.StringField(db_field="opponent_name", required=False)
+
+    ## team
     team_id = mongoengine.IntField(db_field="team_id")
     team_name = mongoengine.StringField(db_field="team_name")
 
+    ## possession
     possession_id = mongoengine.IntField(db_field="poss_id", required=True)
     possession_name = mongoengine.StringField(db_field="possession_name", required=True)
     possession_team_id = mongoengine.IntField(
@@ -204,6 +215,7 @@ class ActionValues(mongoengine.Document):
         db_field="sec", required=True, min_value=0, max_value=59
     )
 
+    ## attack
     attack_status_name = mongoengine.StringField(
         db_field="attack_status_name", required=True
     )
@@ -212,6 +224,7 @@ class ActionValues(mongoengine.Document):
     )
     attack_team_id = mongoengine.StringField(db_field="attack_team_id", required=True)
 
+    ## actions
     action_id = mongoengine.IntField(db_field="action_id", required=True)
     type_name = mongoengine.StringField(
         db_field="type_name", required=True
@@ -225,6 +238,9 @@ class ActionValues(mongoengine.Document):
     )
     generic_action_type_name = mongoengine.StringField(
         db_field="generic_action_type_name", required=True
+    )
+    action_subtype_name = mongoengine.StringField(
+        db_field="action_subtype_name", required=True
     )
 
     under_pressure = mongoengine.BooleanField(db_field="under_pressure", required=True)
@@ -244,6 +260,11 @@ class ActionValues(mongoengine.Document):
     )
     is_poss_team = mongoengine.BooleanField(db_field="is_poss_team", required=True)
     is_att_team = mongoengine.BooleanField(db_field="is_att_team", required=True)
+
+    ## optional
+    touches = mongoengine.StringField(db_field="touches", required=False)
+    shot_type = mongoengine.StringField(db_field="shot_type", required=False)
+    shot_handling = mongoengine.StringField(db_field="shot_handling", required=False)
 
     ## extra fields computed
     action_reference = mongoengine.StringField(
