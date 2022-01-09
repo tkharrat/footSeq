@@ -348,45 +348,90 @@ def predict_game(
     self: MixedSeqLearner,
     game_id: int,
     match_df: pd.DataFrame = None,
-    save: bool = True,
+    save: bool = False,
 ) -> pd.DataFrame:
     "Predict (all the possessions in) a game"
     if match_df is None:
         match_df = Possession.get_all_game_poss(game_id)
 
-    ## remove all existing documents
-    if save:
-        ActionValues.objects(game_id=game_id).delete()
+    _dir = tempfile.TemporaryDirectory()
+    poss_info = []
 
-    l_proba = []
-    for poss_nbr in progressbar(match_df.possessionNumber.unique()):
-        row = match_df[match_df.possessionNumber == poss_nbr]
-        poss_proba = self.predict_poss(
-            row.sequence.iloc[0].rename(columns={"possession_id": "_id"})
-        ).rename(columns={"_id": "possession_id", "proba_no-goal": "proba_none"})
-        poss_proba["game_id"] = row["gameId"].values[0]
-        poss_proba["target"] = row["target"].values[0]
-
-        ## add minutes and sec
-        poss_proba["minutes"] = poss_proba.apply(
-            lambda row: int((row.period_id - 1) * 45 + row.time_seconds // 60), axis=1
+    def _save_poss_files(poss_nbr, sep=learn.dls.tfms.sep):
+        poss_df = (
+            match_df[match_df.possessionNumber == poss_nbr]
+            .sequence.tolist()[0]
+            .sort_values(["time_seconds"])
         )
-        poss_proba["sec"] = poss_proba["time_seconds"].values % 60
+        time_seconds = L(poss_df["time_seconds"].sort_values().tolist()).unique()
+        game_id, poss_number, start_id, end_id, target = poss_df.possession_id[0].split(
+            sep
+        )
 
-        if save:
-            ## create an actionValue object for each row
-            lsave = L(ActionValues(**row.to_dict()) for _, row in poss_proba.iterrows())
-            ActionValues.objects.insert(lsave)
+        def _save_one_file(time):
+            ## extract training data
+            _df = poss_df[poss_df["time_seconds"] <= time].copy()
+            ## create file name
+            _id = sep.join(
+                [
+                    str(game_id),
+                    str(poss_number),
+                    str(_df.event_id.values[0]),
+                    str(_df.event_id.values[-1]),
+                    target,
+                ]
+            )
+            _df["target"] = target
+            _df["_id"] = _id
+            _file_name = _id + ".csv"
+            _file_path = Path(_dir.name) / _file_name
 
-        l_proba.append(poss_proba)
+            ## add last time stamp
+            poss_info.append(_df[_df.time_seconds == time].copy())
 
-    probs_df = (
-        pd.concat(l_proba)
-        .reset_index(drop=True)
-        .sort_values(["possession_number", "time_seconds"])
+            ## save to temporary file
+            _df.to_csv(_file_path, index=False)
+            return _file_path
+
+        return time_seconds.map(_save_one_file)
+
+    files = L(
+        functools.reduce(
+            operator.iconcat,
+            L(match_df.possessionNumber.tolist()).map(_save_poss_files),
+            [],
+        )
+    )
+    poss = pd.concat(poss_info, ignore_index=False).reset_index(drop=True)
+
+    ## preidct and adjust probabilities computed
+    probas = self.predict(files)
+    probas = probas[0]
+    probas["_id"] = files.map(lambda x: x.stem)
+    probas = (
+        poss.merge(probas, on="_id", how="left")
+        .rename(columns={"no-goal": "proba_none", "goal": "proba_goal"})
+        .drop(["_id"], axis="columns")
     )
 
-    return probs_df
+    probas["game_id"] = game_id
+    ## add minutes and sec
+    probas["minutes"] = probas.apply(
+        lambda row: int((row.period_id - 1) * 45 + row.time_seconds // 60), axis=1
+    )
+    probas["sec"] = probas["time_seconds"].values % 60
+    probas = probas.reset_index(drop=True).sort_values(
+        ["possession_number", "time_seconds"]
+    )
+
+    if save:
+        ## remove all existing documents
+        ActionValues.objects(game_id=game_id).delete()
+        ## create an actionValue object for each row
+        lsave = L(ActionValues(**row.to_dict()) for _, row in probas.iterrows())
+        ActionValues.objects.insert(lsave)
+
+    return probas
 
 # Cell
 

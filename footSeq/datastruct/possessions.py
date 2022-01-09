@@ -15,17 +15,22 @@ from ..config.localconfig import CONFIG
 
 class Event(mongoengine.EmbeddedDocument):
     "Event mapping class to store event info stored in the `sequence` field"
+
+    ## events
     event_id = mongoengine.IntField(db_field="event_id")
     orig_event_id = mongoengine.StringField(db_field="eventId")
 
+    ## player
     player_id = mongoengine.IntField(db_field="player_id", required=False)
     player_name = mongoengine.StringField(
         db_field="player_name", required=False, default="Unknown"
     )
 
+    ## team
     team_id = mongoengine.IntField(db_field="team_id")
     team_name = mongoengine.StringField(db_field="team_name")
 
+    ## possession
     possession_id = mongoengine.IntField(db_field="poss_id", required=True)
     possession_name = mongoengine.StringField(db_field="possession_name", required=True)
     possession_team_id = mongoengine.IntField(
@@ -39,11 +44,13 @@ class Event(mongoengine.EmbeddedDocument):
     )
     standart_name = mongoengine.StringField(db_field="standart_name", required=True)
 
+    ## time
     period_id = mongoengine.IntField(
         db_field="period_id", required=True, min_value=1, max_value=2
     )
     time_seconds = mongoengine.FloatField(db_field="time_seconds", required=True)
 
+    ## attack types
     attack_status_name = mongoengine.StringField(
         db_field="attack_status_name", required=True
     )
@@ -52,6 +59,7 @@ class Event(mongoengine.EmbeddedDocument):
     )
     attack_team_id = mongoengine.StringField(db_field="attack_team_id", required=True)
 
+    ## actions
     action_id = mongoengine.IntField(db_field="action_id", required=True)
     type_name = mongoengine.StringField(db_field="type_name", required=True)
     result_id = mongoengine.IntField(
@@ -69,8 +77,12 @@ class Event(mongoengine.EmbeddedDocument):
     shot_type = mongoengine.StringField(db_field="shot_type", required=True)
     shot_handling = mongoengine.StringField(db_field="shot_handling", required=True)
 
+    ## extra info
     under_pressure = mongoengine.BooleanField(db_field="under_pressure", required=True)
     high_speed = mongoengine.BooleanField(db_field="high_speed", required=True)
+    body_name = mongoengine.StringField(
+        db_field="body_name", required=False, default="Unknown"
+    )
 
     ## we allow extra meters to adjust pitch coordinates
     start_x = mongoengine.FloatField(db_field="start_x", min_value=-1, max_value=107)
@@ -78,6 +90,7 @@ class Event(mongoengine.EmbeddedDocument):
     end_x = mongoengine.FloatField(db_field="end_x", min_value=-1, max_value=107)
     end_y = mongoengine.FloatField(db_field="end_y", min_value=-1, max_value=70)
 
+    ## goal gate
     gate_x = mongoengine.FloatField(db_field="gate_x", required=False)
     gate_y = mongoengine.FloatField(db_field="gate_y", required=False)
 
@@ -88,9 +101,7 @@ class Event(mongoengine.EmbeddedDocument):
     opponent_team_id = mongoengine.IntField(db_field="opponent_team_id", required=False)
     opponent_name = mongoengine.StringField(db_field="opponent_name", required=False)
 
-    body_name = mongoengine.StringField(
-        db_field="body_name", required=False, default="Unknown"
-    )
+    ## binary flags
     is_poss_team = mongoengine.BooleanField(db_field="is_poss_team", required=True)
     is_att_team = mongoengine.BooleanField(db_field="is_att_team", required=True)
 
@@ -201,7 +212,6 @@ class ActionValues(mongoengine.Document):
         db_field="seconds_since_poss", min_value=0.0, required=True
     )
     standart_name = mongoengine.StringField(db_field="standart_name", required=True)
-
 
     ## timing
     period_id = mongoengine.IntField(
