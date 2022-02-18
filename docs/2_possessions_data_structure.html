@@ -50,7 +50,7 @@ nb_path: "01_2_possessions_data_structure.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/tmp/ipykernel_592056/2943078347.py:2: UserWarning: IPython.utils.traitlets has moved to a top-level traitlets package.
+<pre>/tmp/ipykernel_519189/2943078347.py:2: UserWarning: IPython.utils.traitlets has moved to a top-level traitlets package.
   from IPython.utils import traitlets as _traitlets
 </pre>
 </div>
@@ -130,7 +130,7 @@ nb_path: "01_2_possessions_data_structure.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Possession" class="doc_header"><code>class</code> <code>Possession</code><a href="https://github.com/tkharrat/footSeq/tree/master/footSeq/datastruct/possessions.py#L115" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Possession</code>(<strong>*<code>args</code></strong>, <strong>**<code>values</code></strong>) :: <code>Document</code></p>
+<h2 id="Possession" class="doc_header"><code>class</code> <code>Possession</code><a href="https://github.com/tkharrat/footSeq/tree/master/footSeq/datastruct/possessions.py#L121" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Possession</code>(<strong>*<code>args</code></strong>, <strong>**<code>values</code></strong>) :: <code>Document</code></p>
 </blockquote>
 <p>Store the <a href="/footSeq/2_possessions_data_structure.html#Possession"><code>Possession</code></a> document info</p>
 <h2 id="Attributes">Attributes<a class="anchor-link" href="#Attributes"> </a></h2><p>_id : str
@@ -229,7 +229,7 @@ target : str
   </thead>
   <tbody>
     <tr>
-      <th>6</th>
+      <th>0</th>
       <td>1998205</td>
       <td>1</td>
       <td>no-goal</td>
@@ -250,14 +250,14 @@ target : str
       <td>event_id orig_event_id  player_id          ...</td>
     </tr>
     <tr>
-      <th>0</th>
+      <th>3</th>
       <td>1998205</td>
       <td>4</td>
       <td>no-goal</td>
       <td>event_id orig_event_id player_id          ...</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>4</th>
       <td>1998205</td>
       <td>5</td>
       <td>no-goal</td>
@@ -271,35 +271,35 @@ target : str
       <td>...</td>
     </tr>
     <tr>
-      <th>147</th>
+      <th>151</th>
       <td>1998205</td>
       <td>154</td>
       <td>no-goal</td>
       <td>event_id orig_event_id  player_id          ...</td>
     </tr>
     <tr>
-      <th>150</th>
+      <th>152</th>
       <td>1998205</td>
       <td>155</td>
       <td>no-goal</td>
       <td>event_id orig_event_id  player_id         ...</td>
     </tr>
     <tr>
-      <th>151</th>
+      <th>153</th>
       <td>1998205</td>
       <td>156</td>
       <td>no-goal</td>
       <td>event_id orig_event_id  player_id          ...</td>
     </tr>
     <tr>
-      <th>145</th>
+      <th>154</th>
       <td>1998205</td>
       <td>157</td>
       <td>no-goal</td>
       <td>event_id orig_event_id player_id           ...</td>
     </tr>
     <tr>
-      <th>143</th>
+      <th>155</th>
       <td>1998205</td>
       <td>158</td>
       <td>no-goal</td>
@@ -326,7 +326,7 @@ target : str
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">poss</span><span class="o">.</span><span class="n">sequence</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">poss</span><span class="o">.</span><span class="n">sequence</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -384,260 +384,20 @@ target : str
   <tbody>
     <tr>
       <th>0</th>
-      <td>5184</td>
-      <td>1998205_5184</td>
-      <td>70856</td>
-      <td>Hakan Calhanoglu</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>15.7</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>42</td>
-      <td>94779</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Milan Skriniar</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5185</td>
-      <td>1998205_5185</td>
-      <td>94779</td>
-      <td>Milan Skriniar</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>30.9</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>32</td>
-      <td>4320</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Stefan de Vrij</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>5186</td>
-      <td>1998205_5186</td>
-      <td>4320</td>
-      <td>Stefan de Vrij</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>30.9</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5187</td>
-      <td>1998205_5187</td>
-      <td>4320</td>
-      <td>Stefan de Vrij</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>15.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>42</td>
-      <td>94779</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Milan Skriniar</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5188</td>
-      <td>1998205_5188</td>
-      <td>94779</td>
-      <td>Milan Skriniar</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>15.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>5189</td>
-      <td>1998205_5189</td>
-      <td>94779</td>
-      <td>Milan Skriniar</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>2.6</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>33</td>
-      <td>26140</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Marcelo Brozovic</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>5190</td>
-      <td>1998205_5190</td>
-      <td>26140</td>
-      <td>Marcelo Brozovic</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>27.3</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>46</td>
-      <td>1693</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Alexis Alehandru Sanchez</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>5191</td>
-      <td>1998205_5191</td>
-      <td>1693</td>
-      <td>Alexis Alehandru Sanchez</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>End</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>21.2</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>5192</td>
-      <td>1998205_5192</td>
-      <td>3898</td>
-      <td>Diego Roberto Godin Leal</td>
+      <td>5135</td>
+      <td>1998205_5135</td>
+      <td>6121</td>
+      <td>Joao Pedro Geraldino dos Santos Galvao</td>
       <td>272</td>
       <td>Cagliari</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
+      <td>1998205___1___5135___5144___no-goal</td>
+      <td>Start</td>
+      <td>272</td>
+      <td>1</td>
       <td>...</td>
-      <td>27.3</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>46</td>
-      <td>1693</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Alexis Alehandru Sanchez</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>5194</td>
-      <td>1998205_5194</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>14.6</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>5195</td>
-      <td>1998205_5195</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>14.9</td>
-      <td>0.00</td>
-      <td>0.00</td>
+      <td>30.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>33</td>
       <td>163764</td>
       <td>Cagliari</td>
@@ -647,405 +407,45 @@ target : str
       <td>True</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>5197</td>
-      <td>1998205_5197</td>
-      <td>70856</td>
-      <td>Hakan Calhanoglu</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
+      <th>1</th>
+      <td>5136</td>
+      <td>1998205_5136</td>
+      <td>163764</td>
+      <td>Razvan Gabriel Marin</td>
+      <td>272</td>
+      <td>Cagliari</td>
+      <td>1998205___1___5135___5144___no-goal</td>
       <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
+      <td>272</td>
+      <td>1</td>
       <td>...</td>
-      <td>17.8</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>5198</td>
-      <td>1998205_5198</td>
-      <td>70856</td>
-      <td>Hakan Calhanoglu</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>10.1</td>
-      <td>0.00</td>
-      <td>0.00</td>
+      <td>5.4</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>44</td>
-      <td>204266</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Nicolo Barella</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>5199</td>
-      <td>1998205_5199</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>10.1</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>5200</td>
-      <td>1998205_5200</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>6.8</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>42</td>
-      <td>94779</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Milan Skriniar</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>5201</td>
-      <td>1998205_5201</td>
-      <td>94779</td>
-      <td>Milan Skriniar</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>4.8</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>44</td>
-      <td>204266</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Nicolo Barella</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>5202</td>
-      <td>1998205_5202</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>13.6</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>46</td>
-      <td>1693</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Alexis Alehandru Sanchez</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>5203</td>
-      <td>1998205_5203</td>
-      <td>1693</td>
-      <td>Alexis Alehandru Sanchez</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>14.2</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>33</td>
-      <td>26140</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Marcelo Brozovic</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>5204</td>
-      <td>1998205_5204</td>
-      <td>26140</td>
-      <td>Marcelo Brozovic</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>5.3</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>44</td>
-      <td>204266</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Nicolo Barella</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>5205</td>
-      <td>1998205_5205</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>8.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>42</td>
-      <td>94779</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Milan Skriniar</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>5206</td>
-      <td>1998205_5206</td>
-      <td>94779</td>
-      <td>Milan Skriniar</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>31.9</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>32</td>
-      <td>4320</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Stefan de Vrij</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>5207</td>
-      <td>1998205_5207</td>
-      <td>4320</td>
-      <td>Stefan de Vrij</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>31.9</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>5208</td>
-      <td>1998205_5208</td>
-      <td>4320</td>
-      <td>Stefan de Vrij</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>64.2</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>22</td>
-      <td>366890</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Alessandro Bastoni</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>5209</td>
-      <td>1998205_5209</td>
-      <td>366890</td>
-      <td>Alessandro Bastoni</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>48.9</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>32</td>
-      <td>3898</td>
+      <td>185339</td>
       <td>Cagliari</td>
       <td>272</td>
-      <td>Diego Roberto Godin Leal</td>
+      <td>Alessandro Deiola</td>
       <td>True</td>
       <td>True</td>
     </tr>
     <tr>
-      <th>24</th>
-      <td>5210</td>
-      <td>1998205_5210</td>
-      <td>3898</td>
-      <td>Diego Roberto Godin Leal</td>
+      <th>2</th>
+      <td>5137</td>
+      <td>1998205_5137</td>
+      <td>185339</td>
+      <td>Alessandro Deiola</td>
       <td>272</td>
       <td>Cagliari</td>
-      <td>1998205___4___5184___5219___no-goal</td>
+      <td>1998205___1___5135___5144___no-goal</td>
       <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>48.9</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>5212</td>
-      <td>1998205_5212</td>
-      <td>366891</td>
-      <td>Raoul Bellanova</td>
       <td>272</td>
-      <td>Cagliari</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
+      <td>1</td>
       <td>...</td>
-      <td>54.3</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>24</td>
-      <td>94550</td>
-      <td>Cagliari</td>
-      <td>272</td>
-      <td>Alberto Grassi</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>5213</td>
-      <td>1998205_5213</td>
-      <td>94550</td>
-      <td>Alberto Grassi</td>
-      <td>272</td>
-      <td>Cagliari</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>54.3</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>5215</td>
-      <td>1998205_5215</td>
-      <td>26140</td>
-      <td>Marcelo Brozovic</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>41.2</td>
-      <td>0.00</td>
-      <td>0.00</td>
+      <td>5.4</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>24</td>
       <td>70856</td>
       <td>Inter Milan</td>
@@ -1055,128 +455,242 @@ target : str
       <td>True</td>
     </tr>
     <tr>
-      <th>27</th>
-      <td>8348</td>
-      <td>1998205_8348</td>
-      <td>26140</td>
-      <td>Marcelo Brozovic</td>
+      <th>4</th>
+      <td>5139</td>
+      <td>1998205_5139</td>
+      <td>366890</td>
+      <td>Alessandro Bastoni</td>
       <td>151</td>
       <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
+      <td>1998205___1___5135___5144___no-goal</td>
       <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
+      <td>272</td>
+      <td>1</td>
       <td>...</td>
-      <td>53.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>5216</td>
-      <td>1998205_5216</td>
-      <td>70856</td>
-      <td>Hakan Calhanoglu</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>27.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>44</td>
-      <td>204266</td>
-      <td>Inter Milan</td>
-      <td>151</td>
-      <td>Nicolo Barella</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>5217</td>
-      <td>1998205_5217</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>27.5</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>5218</td>
-      <td>1998205_5218</td>
-      <td>204266</td>
-      <td>Nicolo Barella</td>
-      <td>151</td>
-      <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>Ball possession</td>
-      <td>151</td>
-      <td>4</td>
-      <td>...</td>
-      <td>29.6</td>
-      <td>4.39</td>
-      <td>2.73</td>
-      <td>31</td>
-      <td>18061</td>
+      <td>9.2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>32</td>
+      <td>3898</td>
       <td>Cagliari</td>
       <td>272</td>
-      <td>Alessio Cragno</td>
-      <td>True</td>
-      <td>True</td>
+      <td>Diego Roberto Godin Leal</td>
+      <td>False</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>32</th>
-      <td>5219</td>
-      <td>1998205_5219</td>
-      <td>None</td>
-      <td>Unknown</td>
+      <th>3</th>
+      <td>8346</td>
+      <td>1998205_8346</td>
+      <td>366890</td>
+      <td>Alessandro Bastoni</td>
       <td>151</td>
       <td>Inter Milan</td>
-      <td>1998205___4___5184___5219___no-goal</td>
-      <td>End</td>
-      <td>151</td>
-      <td>4</td>
+      <td>1998205___1___5135___5144___no-goal</td>
+      <td>Ball possession</td>
+      <td>272</td>
+      <td>1</td>
       <td>...</td>
-      <td>29.6</td>
-      <td>0.00</td>
-      <td>0.00</td>
+      <td>8.3</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>None</td>
       <td>None</td>
       <td>None</td>
       <td>None</td>
       <td>None</td>
-      <td>True</td>
-      <td>True</td>
+      <td>False</td>
+      <td>False</td>
     </tr>
   </tbody>
 </table>
-<p>33 rows × 43 columns</p>
+<p>5 rows × 43 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Possession-metadata">Possession metadata<a class="anchor-link" href="#Possession-metadata"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <a href="/footSeq/2_possessions_data_structure.html#Possession"><code>Possession</code></a> metadata gives us some information about every possession file saved in the training set. It should help us optimize the file selection process we have in place and better target the training process:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="PossessionMetadata" class="doc_header"><code>class</code> <code>PossessionMetadata</code><a href="https://github.com/tkharrat/footSeq/tree/master/footSeq/datastruct/possessions.py#L186" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PossessionMetadata</code>(<strong>*<code>args</code></strong>, <strong>**<code>values</code></strong>) :: <code>Document</code></p>
+</blockquote>
+<p>Store the <a href="/footSeq/2_possessions_data_structure.html#Possession"><code>Possession</code></a> metadata document info</p>
+<h2 id="Attributes">Attributes<a class="anchor-link" href="#Attributes"> </a></h2><p>_id : str
+    unique document identifier which is the same as the potential file name
+actionEnd, actionStart: int
+    event id marking the start and end of the sequence
+gameId : int
+    game-identifier
+possessionNumber : int
+    possession number
+target : str
+    whether the possession ended up in a <code>goal</code> or <code>no-goal</code>
+nSeq: int
+    total number of time steps in the sequence
+attackType: str
+    attack type label
+standartName: str
+    playing type label</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">poss_info</span> <span class="o">=</span> <span class="n">PossessionMetadata</span><span class="o">.</span><span class="n">get_poss_meta</span><span class="p">(</span><span class="n">game_id</span><span class="o">=</span><span class="mi">1098298</span><span class="p">)</span>
+<span class="n">poss_info</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>file_id</th>
+      <th>game_id</th>
+      <th>target</th>
+      <th>action_start</th>
+      <th>action_end</th>
+      <th>n_seq</th>
+      <th>possession_number</th>
+      <th>attack_type</th>
+      <th>standart_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1098298___1___5039___5041___no-goal</td>
+      <td>1098298</td>
+      <td>no-goal</td>
+      <td>5039</td>
+      <td>5041</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Positional attack</td>
+      <td>Indirect free kick</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1098298___1___5039___5042___no-goal</td>
+      <td>1098298</td>
+      <td>no-goal</td>
+      <td>5039</td>
+      <td>5042</td>
+      <td>4</td>
+      <td>1</td>
+      <td>Positional attack</td>
+      <td>Indirect free kick</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1098298___1___5039___5043___no-goal</td>
+      <td>1098298</td>
+      <td>no-goal</td>
+      <td>5039</td>
+      <td>5043</td>
+      <td>5</td>
+      <td>1</td>
+      <td>Positional attack</td>
+      <td>Indirect free kick</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1098298___1___5039___5044___no-goal</td>
+      <td>1098298</td>
+      <td>no-goal</td>
+      <td>5039</td>
+      <td>5044</td>
+      <td>6</td>
+      <td>1</td>
+      <td>Positional attack</td>
+      <td>Indirect free kick</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1098298___1___5039___5045___no-goal</td>
+      <td>1098298</td>
+      <td>no-goal</td>
+      <td>5039</td>
+      <td>5045</td>
+      <td>7</td>
+      <td>1</td>
+      <td>Positional attack</td>
+      <td>Indirect free kick</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
@@ -1205,7 +719,7 @@ target : str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ActionValues" class="doc_header"><code>class</code> <code>ActionValues</code><a href="https://github.com/tkharrat/footSeq/tree/master/footSeq/datastruct/possessions.py#L179" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActionValues</code>(<strong>*<code>args</code></strong>, <strong>**<code>values</code></strong>) :: <code>Document</code></p>
+<h2 id="ActionValues" class="doc_header"><code>class</code> <code>ActionValues</code><a href="https://github.com/tkharrat/footSeq/tree/master/footSeq/datastruct/possessions.py#L248" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActionValues</code>(<strong>*<code>args</code></strong>, <strong>**<code>values</code></strong>) :: <code>Document</code></p>
 </blockquote>
 <p>Store the <code>ActionValue</code> document</p>
 

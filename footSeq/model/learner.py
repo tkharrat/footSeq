@@ -357,7 +357,7 @@ def predict_game(
     _dir = tempfile.TemporaryDirectory()
     poss_info = []
 
-    def _save_poss_files(poss_nbr, sep=learn.dls.tfms.sep):
+    def _save_poss_files(poss_nbr, sep=self.dls.tfms.sep):
         poss_df = (
             match_df[match_df.possessionNumber == poss_nbr]
             .sequence.tolist()[0]

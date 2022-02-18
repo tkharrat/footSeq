@@ -28,11 +28,14 @@ entries:
       title: Model
       url: learner.html
     - output: web,pdf
-      title: Data preparation
+      title: Load a Learner
       url: check_model_output.html
     - output: web,pdf
       title: Get the raw data
       url: ex_statsbomb_spadl_prepare.html
+    - output: web,pdf
+      title: Load a Trained learner
+      url: fine_tune_learner.html
     output: web
     title: footSeq
   output: web
